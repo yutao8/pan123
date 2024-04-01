@@ -21,6 +21,7 @@ use Yutao\pan123\Api\File;
  * @property Link $link 文件链接
  * @method Api setUrlBase($url) 设置api域名
  * @method Api setCacheDir($dir) 设置缓存目录
+ * @method array getError() 获取错误信息
  * @package Yutao\Pan123
  * */
 class Client
@@ -47,11 +48,6 @@ class Client
         return self::$instance[$clientID];
     }
 
-    function getError(): array
-    {
-        return $this->lastClass->getError();
-    }
-
 
     /**
      * @throws Exception
@@ -69,8 +65,7 @@ class Client
     }
 
     function __call($name,$args){
-        call_user_func_array([$this->lastClass,$name],$args);
-        return $this->lastClass;
+        return call_user_func_array([$this->lastClass,$name],$args);
     }
 
 }
