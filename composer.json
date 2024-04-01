@@ -1,0 +1,21 @@
+{
+    "name": "yutao/pan123",
+    "description": "php sdk for 123pan",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Yutao\\Pan123\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "yutao",
+            "email": "yutao.mail@qq.com"
+        }
+    ],
+    "require": {
+      "php": "^7.0.0",
+      "ext-json": "*",
+      "ext-curl": "*"
+    }
+}
