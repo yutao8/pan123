@@ -19,6 +19,8 @@ use Yutao\pan123\Api\File;
  * @property Share $share 文件分享类
  * @property Upload $upload 文件上传类
  * @property Link $link 文件链接
+ * @method Api setUrlBase($url) 设置api域名
+ * @method Api setCacheDir($dir) 设置缓存目录
  * @package Yutao\Pan123
  * */
 class Client
@@ -64,6 +66,11 @@ class Client
             self::$constants[$name]=new $className($this->clientID, $this->clientSecret);
         }
         return $this->lastClass = self::$constants[$name];
+    }
+
+    function __call($name,$args){
+        call_user_func_array([$this->lastClass,$name],$args);
+        return $this->lastClass;
     }
 
 }

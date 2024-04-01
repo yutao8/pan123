@@ -10,9 +10,12 @@ $rootDirName=time();
 $localFile='./upload.txt';
 
 
+
+
 //获取用户信息
 $user=$sdk->user->info();
 var_dump($user);
+
 
 
 //创建目录
