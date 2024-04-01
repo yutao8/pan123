@@ -52,6 +52,7 @@ $sdk=  Client::boot('your clientID', 'your clientSecret');
 ### 其他
 
 - 获取错误信息 `$sdk->getError();`
-- 修改api域名 `define('PAN123_URL_BASE','https:/api.pan123.com')`
+- 修改api域名 `$sdk->setUrlBase();`
+- 修改缓存目录 `$sdk->setCacheDir();`
 
 
