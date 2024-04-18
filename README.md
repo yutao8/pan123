@@ -3,8 +3,11 @@
     dev: https://www.123pan.com/developer
     doc : https://123yunpan.yuque.com/org-wiki-123yunpan-muaork/cr6ced
 
+# composer
+`composer require yutao/pan123`
+
 ## demo  
-    demo.php
+[demo.php](https://github.com/yutao8/pan123/blob/master/demo.php)
 
 ## new
 ```php
