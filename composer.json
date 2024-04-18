@@ -1,6 +1,8 @@
 {
     "name": "yutao/pan123",
+    "type": "library",
     "description": "php sdk for 123pan",
+    "version": "1.0.0",
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -10,7 +12,7 @@
     "authors": [
         {
             "name": "yutao",
-            "email": "yutao.mail@qq.com"
+            "email": "yutaosvip@gmail.com"
         }
     ],
     "require": {
