@@ -115,7 +115,7 @@ class Api
         return $ret;
     }
 
-    protected function cache($key, $value = null, $expire = null)
+    public function cache($key, $value = null, $expire = null)
     {
         $cache_dir = $this->cacheDir ?? (sys_get_temp_dir() . '/pan123/');
         is_dir($cache_dir) or mkdir($cache_dir, 0777, true);

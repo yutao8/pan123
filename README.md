@@ -11,6 +11,9 @@ composer require yutao/pan123
 ## demo  
 [demo.php](https://github.com/yutao8/pan123/blob/master/demo.php)
 
+## 目录程序
+[123index](https://github.com/yutao8/123index)
+
 ## new
 ```php
 use Yutao\Pan123\Client;
@@ -24,6 +27,7 @@ $sdk=  Client::boot('your clientID', 'your clientSecret');
 
 ### 文件
 - 获取文件列表 `$sdk->file->list();`
+- 获取文件列表(新) `$sdk->file->list_v2();`
 - 创建文件夹  `$sdk->file->mkdir();`
 - 移动文件 `$sdk->file->move();`
 - 删除文件 `$sdk->file->delete();`
@@ -43,6 +47,7 @@ $sdk=  Client::boot('your clientID', 'your clientSecret');
 - 开启文件夹直连  `$sdk->link->enable();`
 - 关闭文件夹直连  `$sdk->link->disable();`
 - 获取直链URL  ` $sdk->link->url();`
+- 获取直链鉴权URL  ` $sdk->link->sign();`
 - 执行视频文件转码  ` $sdk->link->doTrans();`
 - 查询转码结果  ` $sdk->link->queryTrans();`
 - 获取视频转码URL  ` $sdk->link->m3u8();`
