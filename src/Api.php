@@ -31,9 +31,9 @@ class Api
         return $this;
     }
 
-    function getError(): array
+    function getError($type=null)
     {
-        return isset($this->error['code']) && $this->error['code'] != 0 ? $this->error : [];
+        return isset($this->error['code']) && $this->error['code'] != 0 ? (is_null($type)?$this->error:($this->error[$type]??'')) : [];
     }
 
 

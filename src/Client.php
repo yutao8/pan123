@@ -21,7 +21,7 @@ use Yutao\pan123\Api\File;
  * @property Link $link 文件链接
  * @method Api setUrlBase($url) 设置api域名
  * @method Api setCacheDir($dir) 设置缓存目录
- * @method array getError() 获取错误信息
+ * @method array getError($type=null) 获取错误信息
  * @package Yutao\Pan123
  * */
 class Client

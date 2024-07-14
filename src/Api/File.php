@@ -31,6 +31,30 @@ class File extends Api
         ]);
         return $res['data']['fileList'] ?? [];
     }
+	
+	
+	/**
+	 * 文件列表v2
+	 *
+	 * @param int    $parentFileId 父级文件夹ID
+	 * @param int    $lastFileId   最后一个文件ID，用于翻页
+	 * @param int    $limit        每页数量 (<=100)
+	 * @param string $searchData   搜索关键字
+	 * @param int    $searchMode   搜索模式（0：全文搜索，1：文件名搜索）
+	 *
+	 * @return array
+	 */
+	function list_v2(int $parentFileId=0,int $lastFileId=0, int $limit=20,  string $searchData='',int $searchMode=0 ): array
+	{
+		$res = $this->http_get('/api/v2/file/list', [
+			'parentFileId'=>$parentFileId,
+			'limit'=>$limit,
+			'searchData'=>$searchData,
+			'searchMode'=>$searchMode,
+			'lastFileId'=>$lastFileId,
+		]);
+		return $res['data']?? [];
+	}
 
     //获取一个文件
     function find(int $parentFileId=0, string $searchData='', int $page=1, int $limit=20, string $orderBy='file_name', string $orderDirection='asc', bool $trashed=false)
