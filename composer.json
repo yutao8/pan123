@@ -2,7 +2,7 @@
     "name": "yutao/pan123",
     "type": "library",
     "description": "php sdk for 123pan",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "license": "MIT",
     "autoload": {
         "psr-4": {
