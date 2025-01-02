@@ -31,9 +31,9 @@ class Api
         return $this;
     }
 
-    function getError($type=null)
+    function getError($type = 'msg')
     {
-        return isset($this->error['code']) && $this->error['code'] != 0 ? (is_null($type)?$this->error:($this->error[$type]??'')) : [];
+        return  empty($type) ? $this->error : ($this->error[$type] ?? '');
     }
 
 
@@ -45,7 +45,7 @@ class Api
 
     function setCacheDir($dir): Api
     {
-        $this->cacheDir=$dir;
+        $this->cacheDir = $dir;
         return $this;
     }
 
@@ -110,7 +110,7 @@ class Api
             $ret['_body'] = $output;
             $ret['_data'] = ['url' => $this->urlBase . $url];
         }
-        $this->setError($ret['message'] ?? '', $ret['code'], $ret);
+        $ret['code'] === 0 or $this->setError($ret['message'] ?? '', $ret['code'], $ret);
         curl_close($curl);
         return $ret;
     }
@@ -134,6 +134,4 @@ class Api
         }
         return false;
     }
-
-
 }

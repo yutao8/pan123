@@ -2,4 +2,5 @@
 .idea
 .vscode
 composer.lock
-/upload.txt
+/config.php
+/settings.json

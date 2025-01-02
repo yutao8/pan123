@@ -2,7 +2,7 @@
     "name": "yutao/pan123",
     "type": "library",
     "description": "php sdk for 123pan",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -16,8 +16,9 @@
         }
     ],
     "require": {
-      "php": ">=7.0.0",
-      "ext-json": "*",
-      "ext-curl": "*"
+        "php": ">=7.4.0",
+        "ext-json": "*",
+        "ext-curl": "*",
+        "ext-gd": "*"
     }
 }

@@ -21,17 +21,19 @@ use Yutao\pan123\Api\File;
  * @property Link $link 文件链接
  * @method Api setUrlBase($url) 设置api域名
  * @method Api setCacheDir($dir) 设置缓存目录
- * @method array getError($type=null) 获取错误信息
+ * @method array|string getError($type=null) 获取错误信息
  * @package Yutao\Pan123
  * */
 class Client
 {
-    private static $instance;
+    protected static $instance;
 
     private static $constants;
     private $clientID;
     private $clientSecret;
     private $lastClass;
+
+    const modulePath = '';
 
 
     private function __construct($clientID, $clientSecret)
@@ -43,7 +45,7 @@ class Client
     public static function boot($clientID, $clientSecret): Client
     {
         if (!isset(self::$instance[$clientID])) {
-            self::$instance[$clientID] = new self($clientID, $clientSecret);
+            self::$instance[$clientID] = new static($clientID, $clientSecret);
         }
         return self::$instance[$clientID];
     }
@@ -55,17 +57,17 @@ class Client
     public function __get($name)
     {
         if (!isset(self::$constants[$name])) {
-            $className = __NAMESPACE__ . "\\Api\\" . ucfirst($name);
-            if (!class_exists($className)){
+            $className = __NAMESPACE__ . "\\Api\\" . static::modulePath . ucfirst($name);
+            if (!class_exists($className)) {
                 throw new Exception("Method $name not found");
             }
-            self::$constants[$name]=new $className($this->clientID, $this->clientSecret);
+            self::$constants[$name] = new $className($this->clientID, $this->clientSecret);
         }
         return $this->lastClass = self::$constants[$name];
     }
 
-    function __call($name,$args){
-        return call_user_func_array([$this->lastClass,$name],$args);
+    function __call($name, $args)
+    {
+        return call_user_func_array([$this->lastClass, $name], $args);
     }
-
 }
