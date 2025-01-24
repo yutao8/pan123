@@ -5,7 +5,7 @@
 
 # composer
 ```bash
-composer require yutao/pan123
+composer require yutao/pan123:dev-master
 ```
 
 ## demo  
