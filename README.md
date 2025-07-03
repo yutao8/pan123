@@ -30,6 +30,8 @@ $sdk=  Client::boot('your clientID', 'your clientSecret');
 - 获取文件列表 `$sdk->file->list();`
 - 获取文件列表(新) `$sdk->file->list_v2();`
 - 查找文件 `$sdk->file->find();`
+- 文件详情 `$sdk->file->detail();`
+- 文件下载 `$sdk->file->download();`
 - 创建文件夹  `$sdk->file->mkdir();`
 - 移动文件 `$sdk->file->move();`
 - 重命名文件 `$sdk->file->rename();`

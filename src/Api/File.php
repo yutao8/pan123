@@ -60,10 +60,11 @@ class File extends Api
      * @param int    $limit        每页数量 (<=100)
      * @param string $searchData   搜索关键字
      * @param int    $searchMode   搜索模式（0：全文搜索，1：文件名搜索）
+     * @param bool   $trashed      是否显示回收站文件
      *
      * @return array
      */
-    function list_v2(int $parentFileId = 0, int $lastFileId = 0, int $limit = 20,  string $searchData = '', int $searchMode = 0): array
+    function list_v2(int $parentFileId = 0, int $lastFileId = 0, int $limit = 20,  string $searchData = '', int $searchMode = 0,bool  $trashed=false): array
     {
         $res = $this->http_get('/api/v2/file/list', [
             'parentFileId' => $parentFileId,
@@ -71,6 +72,7 @@ class File extends Api
             'searchData' => $searchData,
             'searchMode' => $searchMode,
             'lastFileId' => $lastFileId,
+            'trashed'=> $trashed
         ]);
         return $res['data'] ?? [];
     }
@@ -89,6 +91,19 @@ class File extends Api
         $res = $this->http_get('/api/v1/file/detail', ['fileID' => $fileID]);
         return $res['data'] ?? false;
     }
+	
+	
+	/**
+	 * 下载文件
+	 *
+	 * @param string $fileId
+	 * @return array|false
+	 */
+	function download(string $fileId): array
+	{
+		$res = $this->http_get('/api/v1/file/download_info', ['fileId' => $fileId]);
+		return $res['data'] ?? false;
+	}
 
 
     /**
