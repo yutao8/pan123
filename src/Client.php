@@ -7,8 +7,8 @@ use Yutao\Pan123\Api\Download;
 use Yutao\Pan123\Api\Link;
 use Yutao\Pan123\Api\Share;
 use Yutao\Pan123\Api\Upload;
-use Yutao\pan123\Api\User;
-use Yutao\pan123\Api\File;
+use Yutao\Pan123\Api\User;
+use Yutao\Pan123\Api\File;
 
 
 /**

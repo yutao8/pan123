@@ -118,14 +118,19 @@ class Api
     public function cache($key, $value = null, $expire = null)
     {
         $cache_dir = $this->cacheDir ?? (sys_get_temp_dir() . '/pan123/');
-        is_dir($cache_dir) or mkdir($cache_dir, 0777, true);
+        is_dir($cache_dir) or mkdir($cache_dir, 0755, true);
         $filename = $cache_dir . md5($key) . '.php';
         if (!is_null($value)) {
-            $cache_data = serialize(['key' => $key, 'data' => $value, 'time' => time(), 'expire' => $expire]);
+            $cache_data = json_encode(['key' => $key, 'data' => $value, 'time' => time(), 'expire' => $expire]);
             return file_put_contents($filename, $cache_data);
         }
         if (is_file($filename)) {
-            $data = unserialize(file_get_contents($filename));
+            $content = file_get_contents($filename);
+            $data = json_decode($content, true);
+            // 兼容旧的序列化格式
+            if ($data === null) {
+                $data = @unserialize($content);
+            }
             if (isset($data['expire']) && time() > $data['time'] + $data['expire']) {
                 unlink($filename); //缓存过期删除缓存文件
                 return false;

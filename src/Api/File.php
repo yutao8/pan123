@@ -34,7 +34,8 @@ class File extends Api
 
     function find(int $parentFileId = 0, string $searchData = '', int $page = 1, int $limit = 100, string $orderBy = 'file_name', string $orderDirection = 'asc', bool $trashed = false)
     {
-        while (true) {
+        $maxPages = 1000; // 最多查询1000页，防止无限循环
+        while ($page <= $maxPages) {
             $list = $this->list($parentFileId, $searchData, $page, $limit, $orderBy, $orderDirection, $trashed);
             if (empty($list)) {
                 return [];
@@ -49,6 +50,7 @@ class File extends Api
             }
             $page++;
         }
+        return [];
     }
 
 
@@ -97,12 +99,12 @@ class File extends Api
 	 * 下载文件
 	 *
 	 * @param string $fileId
-	 * @return array|false
+	 * @return array
 	 */
 	function download(string $fileId): array
 	{
 		$res = $this->http_get('/api/v1/file/download_info', ['fileId' => $fileId]);
-		return $res['data'] ?? false;
+		return $res['data'] ?? [];
 	}
 
 

@@ -23,13 +23,14 @@ class Upload extends File
             //秒传
             return $preview;
         }
+        $result = [];
         if (!empty($preview['preuploadID'])){
             if($this->chunk($filePath,$preview['sliceSize'],$preview['preuploadID'])){
                 $result = $this->finish($preview['preuploadID']);
 	            $result && $result['preuploadID']=$preview['preuploadID'];
             }
         }
-        return $result??[];
+        return $result;
     }
 
 
@@ -83,18 +84,24 @@ class Upload extends File
     function chunk(string $file, int $chunkSize, string $preuploadID)
     {
         $handle = fopen($file, 'rb');
-        $chunkIndex=0;
-        do {
-            $uploadUrl=$this->getUploadUrl($preuploadID,$chunkIndex+1);
-            $chunkData = fread($handle, $chunkSize);
-            $res=$this->curl_upload($uploadUrl,$chunkData);
-            if (!$res){
-                return false;
-            }
-            $chunkIndex++;
-        }while(!feof($handle));
-        fclose($handle);
-        return $chunkIndex;
+        if (!$handle) {
+            return false;
+        }
+        try {
+            $chunkIndex=0;
+            do {
+                $uploadUrl=$this->getUploadUrl($preuploadID,$chunkIndex+1);
+                $chunkData = fread($handle, $chunkSize);
+                $res=$this->curl_upload($uploadUrl,$chunkData);
+                if (!$res){
+                    return false;
+                }
+                $chunkIndex++;
+            }while(!feof($handle));
+            return $chunkIndex;
+        } finally {
+            fclose($handle);
+        }
     }
 	
 	/**
@@ -155,6 +162,7 @@ class Upload extends File
         ]);
         curl_exec($curl);
         $errCode=curl_errno($curl);
+        curl_close($curl);
         return $errCode===0;
     }
 
