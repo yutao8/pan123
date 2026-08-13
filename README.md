@@ -1,3 +1,5 @@
+
+
 # 123pan sdk for php
     website : https://www.123pan.com/
     dev: https://www.123pan.com/developer
@@ -20,6 +22,7 @@ composer require yutao/pan123
 ### 使用
 ```php
 use Yutao\Pan123\Client;
+// 对应 config.example.php 中的 accessKeyId 和 accessKeySecret
 $sdk=  Client::boot('your clientID', 'your clientSecret');
 ```
 
@@ -102,5 +105,3 @@ $oss=  Oss::boot('your clientID', 'your clientSecret');
 - 获取错误信息 `$oss->getError();`
 - 修改api域名 `$oss->setUrlBase();`
 - 修改缓存目录 `$oss->setCacheDir();`
-
-
